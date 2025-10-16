@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skincare Tips</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<button id="backToTop" title="Back to Top">↑</button>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">Glow Guide by Neha</div>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="routine.html">Routine</a>
+        <a href="tips.html">Tips</a>
+        <a href="contact.html">Contact</a>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- Tips Section -->
+  <section class="tips-section">
+    <h2>Top Skincare Tips 💖</h2>
+
+    <div class="tip-card">
+      <img src="https://i.pinimg.com/736x/3f/1b/76/3f1b7628f27e9c07edbb55b061e36edb.jpg" alt="Hydration">
+      <div>
+        <h3>Stay Hydrated 💧</h3>
+        <p>Drinking enough water is essential for clear, glowing skin. Aim for at least 8 glasses a day!</p>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <img src="https://media.post.rvohealth.io/wp-content/uploads/sites/3/2022/01/patch_testing_GettyImages1337523320_Thumb.jpg" alt="Patch Test">
+      <div>
+        <h3>Always Patch Test New Products 🧪</h3>
+        <p>Before using a new product, test it on a small area to avoid allergic reactions or breakouts.</p>
+      </div>
+    </div>
+
+    <div class="tip-card">
+      <img src="https://i.pinimg.com/736x/d8/a9/d5/d8a9d545fe42b799435687a2b254f915.jpg" alt="Clean Pillowcase">
+      <div>
+        <h3>Change Your Pillowcase Regularly 🛏️</h3>
+        <p>Bacteria builds up fast — try changing it 2–3 times a week for clearer skin.</p>
+      </div>
+    </div>
+  </section>
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  };
+
+  backToTop.onclick = function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+</script>
+
+
+</body>
+</html>
