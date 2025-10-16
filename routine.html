@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skincare Routines</title>
+  <link rel="stylesheet" href="style.css"> <!-- Link to your existing CSS -->
+</head>
+<button id="backToTop" title="Back to Top">↑</button>
+
+<body>
+  <!-- Header -->
+<header class="site-header">
+  <div class="header-container">
+    <div class="logo">Glow Guide by Neha</div>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="routine.html">Routine</a>
+      <a href="tips.html">Tips</a>
+      <a href="contact.html">Contact</a>
+
+    </nav>
+  </div>
+</header>
+
+  <!-- ✨ Skincare Routine Section -->
+<section id="routine" class="routine-section" style="padding: 60px 20px; background-color: #fff0f5;">
+  <h2 style="text-align: center; color: #cc3366; font-size: 36px; margin-bottom: 30px;">Find Your Skincare Routine</h2>
+
+  <!-- Step 1: Choose Day or Night -->
+  <div style="text-align: center; margin-bottom: 30px;">
+    <button onclick="showSkinType('day')" class="routine-btn">Day Routine</button>
+    <button onclick="showSkinType('night')" class="routine-btn">Night Routine</button>
+  </div>
+
+  <!-- Step 2: Choose Skin Type -->
+  <div id="skinTypeOptions" style="display:none; text-align:center; margin-bottom: 30px;">
+    <button onclick="showRoutine('oily')" class="routine-btn">Oily</button>
+    <button onclick="showRoutine('dry')" class="routine-btn">Dry</button>
+    <button onclick="showRoutine('combination')" class="routine-btn">Combination</button>
+  </div>
+
+  <!-- Step 3: Show Routine Results -->
+  <div id="routineSteps" style="display:none;">
+    <h3 id="routineTitle" style="text-align:center; color: #cc3366;"></h3>
+    <div id="routineContent" class="routine-content" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;"></div>
+  </div>
+</section>
+
+<!-- ✨ Smooth Button Styling -->
+<style>
+  .routine-btn {
+    background-color: #ff99cc;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .routine-btn:hover {
+    background-color: #cc3366;
+  }
+
+  .routine-card {
+    background: white;
+    width: 250px;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .routine-card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 10px;
+  }
+
+  .routine-card h4 {
+    color: #cc3366;
+    margin-bottom: 5px;
+  }
+
+  .routine-card p {
+    font-size: 14px;
+  }
+</style>
+
+<!-- ✨ Script to Handle Logic -->
+<script>
+  let selectedTime = "";
+
+  function showSkinType(time) {
+    selectedTime = time;
+    document.getElementById("skinTypeOptions").style.display = "block";
+    document.getElementById("routineSteps").style.display = "none";
+  }
+
+  function showRoutine(skinType) {
+    const routineTitle = `${selectedTime.charAt(0).toUpperCase() + selectedTime.slice(1)} Routine for ${skinType.charAt(0).toUpperCase() + skinType.slice(1)} Skin`;
+    document.getElementById("routineTitle").textContent = routineTitle;
+
+    const steps = getRoutineSteps(selectedTime, skinType);
+
+    const container = document.getElementById("routineContent");
+    container.innerHTML = "";
+
+    steps.forEach(step => {
+      const card = document.createElement("div");
+      card.className = "routine-card";
+
+      card.innerHTML = `
+        <img src="${step.image}" alt="${step.title}">
+        <h4>${step.title}</h4>
+        <p>${step.desc}</p>
+        <p><strong>Recommended:</strong> ${step.product}</p>
+      `;
+
+      container.appendChild(card);
+    });
+
+    document.getElementById("routineSteps").style.display = "block";
+  }
+
+  function getRoutineSteps(time, skin) {
+    // 💡 Replace placeholder image URLs with your Pinterest URLs
+    const img = "https://i.pinimg.com/564x/23/2c/80/232c80c4a1a9d186e3b1f0ac4e0ecb12.jpg";
+    const routines = {
+      day: {
+        oily: [
+          { title: "Cleanser", desc: "Foaming gel cleanser", product: "CeraVe Foaming Cleanser", image: 'https://i.pinimg.com/736x/7c/fd/0f/7cfd0f38f24c52bb0b9b0d540a5e7b48.jpg' },
+          { title: "Toner", desc: "Oil-controlling, alcohol-free", product: "Pixi Glow Tonic", image: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTECl1cvZ27jBas0gobUjJuopLyjbR1IXpKWopMEtjvZx1MlZ8nkFhQ_4eHLR0KzIHxH-pdNrk41C3fE5O58VSVZ0SGU3oXOTkcANgtKpMdgft3JdO5Da7-Eg' },
+          { title: "Serum", desc: "Controls oil and breakouts", product: "The Ordinary Niacinamide 10%", image: 'https://images.squarespace-cdn.com/content/v1/54d4717de4b0950984a1ad2f/1549383988780-LPIF231QTWKG6TLG1MMR/The-Ordinary-Niacinamide-2.jpg' },
+          { title: "Moisturizer", desc: "Lightweight gel-based", product: "Neutrogena Hydro Boost", image: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSz7HhlkF4unN3wryTqGcrG0faw9YvWdGraQ0OpDnEXSFrsJ8ZJwwavTV9ilOdP0ZD2bW-qsW49yfjoddDjmGRbzbYRTWcBlXhSUXp55j2UAR45YIDgG_JQvxt4' },
+          { title: "Sunscreen", desc: "Matte finish SPF 50+", product: "La Roche-Posay Anthelios", image: 'https://rukminim3.flixcart.com/image/850/1000/xif0q/sunscreen/4/m/5/50-anthelios-spf-anti-shine-gel-cream-50-ml-50-la-roche-posay-original-imagmvmfdurqqzve.jpeg?q=90&crop=false' }
+        ],
+        dry: [
+          { title: "Cleanser", desc: "Hydrating cream cleanser", product: "Cetaphil Gentle Cleanser", image: 'https://static.beautytocare.com/cdn-cgi/image/width=1600,height=1600,f=auto/media/catalog/product//c/e/cetaphil-gentle-skin-cleanser-dry-sensitive-skin-473ml_5.jpg' },
+          { title: "Toner", desc: "Moisture-boosting toner", product: "Klairs Supple Toner", image: 'https://m.media-amazon.com/images/I/61K2fOs4y-S._AC_UF1000,1000_QL80_.jpg' },
+          { title: "Serum", desc: "Hydration and glow", product: "Hyaluronic Acid Serum", image: 'https://m.media-amazon.com/images/I/519mCFEcjJL.jpg' },
+          { title: "Moisturizer", desc: "Rich creamy moisturizer", product: "CeraVe Moisturizing Cream", image: 'https://images-cdn.ubuy.co.in/6621bf04f3ef487a2567635e-aveeno-daily-moisturizing-lotion-18.jpg' },
+          { title: "Sunscreen", desc: "Hydrating SPF", product: "Neutrogena Ultra Sheer", image: 'https://images.ctfassets.net/bcjr30vxh6td/4vNOMK5Ykqtu9lI1f0ik7l/fc99a446ac4654eb484b106d9429e12e/6868790_Carousel7.webp' }
+        ],
+        combination: [
+          { title: "Cleanser", desc: "Balance oil and dry zones", product: "Simple Refreshing Cleanser", image: 'https://assets.myntassets.com/w_412,q_60,dpr_2,fl_progressive/assets/images/13698440/2023/12/14/141aca60-00ef-45ed-a735-9fc197ac6e981702545540587SimpleKindToSkinRefreshingFacialWash150ml2.jpg' },
+          { title: "Toner", desc: "Gentle exfoliating toner", product: "Paula’s Choice PHA", image: 'https://images-cdn.ubuy.co.in/668569742558594d6771469f-bioderma-hydrabio-tonique-moisturising.jpg' },
+          { title: "Serum", desc: "Target both dryness & oil", product: "Vitamin C Serum", image: 'https://images-cdn.ubuy.co.in/67225663d2a6dc5ec84b400b-l-39-oreal-paris-12-pure-vitamin-c.jpg' },
+          { title: "Moisturizer", desc: "Balanced hydration", product: "Clinique Moisture Surge", image: 'https://m.media-amazon.com/images/I/71l2ncE83LL.jpg' },
+          { title: "Sunscreen", desc: "SPF for mixed skin types", product: "Biore Watery Essence", image: 'https://images-static.nykaa.com/media/catalog/product/d/1/d14a18cBIOAB00000022_2040424.jpg?tr=w-500' }
+        ]
+      },
+      night: {
+        oily: [
+          { title: "Cleanser", desc: "Oil-clearing cleanser", product: "Clean & Clear Morning Burst", image: 'https://static.sweetcare.com/img/prd/488/v-638520724479610182/cerave-007772ve-8.webp'},
+          { title: "Toner", desc: "Shrink pores gently", product: "Thayers Witch Hazel", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReZqTsV9IwXefE1QWw-pTnTPDrDr4CSAsekw&s' },
+          { title: "Serum", desc: "Regulates oil at night", product: "Niacinamide + Zinc", image: 'https://m.media-amazon.com/images/I/5101c3q-3lL.jpg' },
+          { title: "Moisturizer", desc: "Gel formula for overnight hydration", product: "Plum Green Tea Night Gel", image: 'https://static.sweetcare.com/img/prd/488/v-638520541177714298/cetaphil-007809cc-1.webp'},
+          { title: "Night Cream", desc: "Repairing & soothing", product: "Dot & Key Night Reset", image: 'https://www.jiomart.com/images/product/original/rvyv1w0mqh/olay-night-cream-regenerist-deep-hydration-light-cream-50-gm-product-images-orvyv1w0mqh-p604796277-2-202309260401.jpg?im=Resize=(420,420)' }
+        ],
+        dry: [
+          { title: "Cleanser", desc: "Gentle hydration cleanser", product: "Aveeno Hydrating Wash", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBoy2esB9zQ_XisQa0_S2xb3cq5SPPpTu0Ug&s' },
+          { title: "Toner", desc: "Hydrating mist toner", product: "Avene Thermal Spring", image: 'https://us.laneige.com/cdn/shop/files/1080x10800_Thumbnail_Product.jpg?v=1739393277&width=672' },
+          { title: "Serum", desc: "Deep moisture repair", product: "Hyaluronic Night Serum", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHYcttCDiEjBJVB5qDKOZDe7ZFstTwTPyKFA&s' },
+          { title: "Moisturizer", desc: "Heavy night cream", product: "The Face Shop Rice Cream", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJSzA-r0GiuYb3w0znR8XrRVP8enYHn8In_g&s' },
+          { title: "Night Cream", desc: "Overnight nourishing balm", product: "Laneige Sleeping Mask", image: 'https://img.nivea.com/-/media/miscellaneous/media-center-items/8/e/5/5999901387314f1682e0f1f55e48f961-web_1010x1180_transparent_png.png' }
+        ],
+        combination: [
+          { title: "Cleanser", desc: "Balancing foam cleanser", product: "Cosrx Low pH Cleanser", image: 'https://www.simpleskincare.in/cdn/shop/files/1_e698f8d9-26db-4c93-83a6-6f5615dfc91e_1000x1000.png?v=1689702001' },
+          { title: "Toner", desc: "Balances dry/oily areas", product: "Isntree Green Tea Toner", image: 'https://m.media-amazon.com/images/I/61wkQbHSoHL.jpg' },
+          { title: "Serum", desc: "Repair and brighten", product: "L’Oreal Revitalift", image: 'https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyprod/wrkr/products/pictures/item/free/original/000000000494474993/5rNcYrn0pqb-000000000494474993_1.jpg' },
+          { title: "Moisturizer", desc: "Light yet nourishing", product: "Belif Aqua Bomb", image: 'https://m.media-amazon.com/images/I/81Ovd+B2N6L._AC_UF350,350_QL80_.jpg' },
+          { title: "Night Cream", desc: "Hydrating & calming", product: "Olay Regenerist Night Cream", image: 'https://m.media-amazon.com/images/I/6140aAPFblL._AC_UF1000,1000_QL80_.jpg' }
+        ]
+      }
+    };
+
+    return routines[time][skin];
+  }
+</script>
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  };
+
+  backToTop.onclick = function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+</script>
+
+
+
+
+</body>
+</html>
