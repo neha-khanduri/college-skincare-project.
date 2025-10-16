@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Glow Guide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Wrapping everything inside a background div -->
+  <div class="contact-page-background">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="header-container">
+        <div class="logo">Glow Guide by Neha</div>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="routine.html">Routine</a>
+          <a href="tips.html">Tips</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <h2>Contact Us 💌</h2>
+      <p>We'd love to hear from you! Feel free to reach out with questions, feedback, or collaboration ideas.</p>
+
+      <form class="contact-form">
+  <input type="text" placeholder="Your Name" required />
+  <input type="email" placeholder="Your Email" required />
+  <textarea rows="5" placeholder="Your Message" required></textarea>
+  <button type="submit">Send Message</button>
+</form>
+
+<div id="successMessage" class="success-message" style="display: none;">
+  💌 Your message has been sent successfully!
+</div>
+
+    </section>
+    
+  </div>
+<script>
+  const form = document.querySelector(".contact-form");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // prevent page refresh
+
+    const message = document.createElement("p");
+    message.textContent = "Your message has been sent successfully!";
+    message.style.color = "#8e0038";
+    message.style.marginTop = "15px";
+
+    form.appendChild(message);
+
+    // Optional: Clear the fields
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
