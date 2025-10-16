@@ -7,9 +7,6 @@ It includes sections like **Home**, **Routine**, and **Tips** — focused on sim
 
 ### 💻 How to View
 - Open **index.html** in your browser  
-**or**
-- Visit the live site: [https://yourusername.github.io/college-skincare-project/](https://yourusername.github.io/college-skincare-project/)
-
 ---
 
 ### 🎓 Project Info
